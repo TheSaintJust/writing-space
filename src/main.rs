@@ -273,7 +273,7 @@ fn App() -> impl IntoView {
                                                         set_selected_id.set(id);
                                                     }
                                                     placeholder="Write one sentence or thought…"
-                                                    rows=if sentence.text.len() > 95 { 3 } else if sentence.text.len() > 48 { 2 } else { 1 }
+                                                    rows={if sentence.text.len() > 95 { 3 } else if sentence.text.len() > 48 { 2 } else { 1 }}
                                                     aria-label="Sentence block"
                                                 ></textarea>
                                                 <div class="sentence-tools">
@@ -309,7 +309,7 @@ fn App() -> impl IntoView {
                             <div class="outline-stats"><strong>{move || sentence_total()}</strong><span>"sentence blocks"</span></div>
                             <div class="outline-preview">
                                 <For
-                                    each=move || sentences.get().into_iter().filter(|sentence| !sentence.text.trim().is_empty()).collect::<Vec<_>>()
+                                    each=move || { sentences.get().into_iter().filter(|sentence| !sentence.text.trim().is_empty()).collect::<Vec<_>>() }
                                     key=|sentence| sentence.id
                                     children=move |sentence| {
                                         let id = sentence.id;
