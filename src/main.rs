@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos::mount::mount_to_body;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
