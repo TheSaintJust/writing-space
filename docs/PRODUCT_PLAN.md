@@ -41,10 +41,11 @@ Build a simple, usable writing screen before adding complex AI features.
 - Do not fabricate sources, quotations, page numbers, or evidence.
 
 ## Initial technical direction (subject to validation)
-- Frontend: React + TypeScript.
-- Hosting and application API: Cloudflare Workers.
-- Database: Cloudflare D1 for the first version, if its limits and data model fit.
-- File storage: Cloudflare R2 when PDF uploads are introduced.
+- Browser interface: Rust compiled to WebAssembly with Leptos.
+- Static hosting: evaluate Cloudflare Pages after validating the build.
+- Backend API: Rust, selected and deployed in a later milestone.
+- Database: evaluate Cloudflare D1 when cloud saving and team accounts are introduced.
+- File storage: evaluate Cloudflare R2 when PDF uploads are introduced.
 - AI: no AI provider until the assessment milestone; provider and costs must be explained before enabling it.
 - Use GitHub for source code and change history.
 
