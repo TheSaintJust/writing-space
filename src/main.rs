@@ -132,9 +132,6 @@ fn App() -> impl IntoView {
         let markdown = format!("# {}\n\n{}\n", current_title, body);
         if let Some(window) = web_sys::window() {
             if let Some(document) = window.document() {
-                if let Ok(blob_parts) = js_sys::Array::try_from(&JsValue::from_str(&markdown)) {
-                    let _ = blob_parts;
-                }
                 let encoded = js_sys::encode_uri_component(&markdown);
                 if let Ok(link) = document.create_element("a") {
                     let _ = link.set_attribute("href", &format!("data:text/markdown;charset=utf-8,{}", encoded));
