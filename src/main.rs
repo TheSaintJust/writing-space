@@ -133,7 +133,7 @@ fn App() -> impl IntoView {
         let markdown = format!("# {}\n\n{}\n", current_title, body);
         if let Some(window) = web_sys::window() {
             if let Some(document) = window.document() {
-                let encoded = js_sys::encode_uri_component(&markdown);
+                let encoded = js_sys::encode_uri_component(&markdown).as_string().unwrap_or_default();
                 if let Ok(link) = document.create_element("a") {
                     let _ = link.set_attribute("href", &format!("data:text/markdown;charset=utf-8,{}", encoded));
                     let filename = current_title
@@ -247,7 +247,10 @@ fn App() -> impl IntoView {
 
                         <div class="sentence-list">
                             <For
-                                each=move || sentences.get()
+                                each=move || {
+                                    let term = search.get().trim().to_lowercase();
+                                    sentences.get().into_iter().filter(|sentence| term.is_empty() || sentence.text.to_lowercase().contains(&term)).collect::<Vec<_>>()
+                                }
                                 key=|sentence| sentence.id
                                 children=move |sentence| {
                                     let id = sentence.id;
